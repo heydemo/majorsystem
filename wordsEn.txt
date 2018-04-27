@@ -1,3 +1,6 @@
+todd
+loves
+chillis
 a
 aah
 aahed
@@ -16013,6 +16016,7 @@ chiller
 chillers
 chillest
 chilli
+chillis
 chillier
 chillies
 chilliest
@@ -22993,7 +22997,6 @@ cutup
 cutups
 cutworm
 cutworms
-cwt
 cyan
 cyanic
 cyanide
@@ -63084,8 +63087,6 @@ niggarding
 niggardliness
 niggardly
 niggards
-nigger
-niggers
 niggle
 niggled
 niggler
@@ -98230,6 +98231,7 @@ tocsin
 tocsins
 today
 todays
+todd
 toddies
 toddle
 toddled
