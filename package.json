@@ -2,13 +2,19 @@
   "name": "majorsystem",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/majorsystem.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "John De Mott",
   "license": "ISC",
+  "preferGlobal": true,
+  "bin": {
+    "majorsystem": "./bin/index.js"
+  },
   "dependencies": {
-    "prettyjson": "^1.2.1"
+    "chalk": "^2.4.1",
+    "prettyjson": "^1.2.1",
+    "yargs": "^11.0.0"
   }
 }

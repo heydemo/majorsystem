@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const ms = require('./majorsystem.js');
+const ms = require('../lib/majorsystem.js');
 
 var argv = require('yargs')
   .usage('majorsystem [number]')
