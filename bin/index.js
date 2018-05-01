@@ -14,6 +14,18 @@ var argv = require('yargs')
     describe: 'Maximum number of mnemonics to display',
     default: 10,
   })
+  .option('mapFile', {
+    describe: 'A JSON file mapping digits to consonants',
+    default: '',
+  })
+  .option('exclude', {
+    describe: 'A comma separated list of words to exclude',
+    default: '',
+  })
+  .option('randomize', {
+    describe: 'Shuffle results, still sorting by least words',
+    count: true,
+  })
   .option('colorize', {
     describe: 'Colorize the consonants',
     count: true,
@@ -29,12 +41,17 @@ var argv = require('yargs')
 var num = argv._[0];
 var limit = argv.limit;
 
-var options = {
-  maxDepth: argv.depth,
-}
 
 
 const start = new Date().getTime();
+const excludes = argv.exclude ? argv.exclude.split(',') : [];
+
+var options = {
+  maxDepth: argv.depth,
+  excludes: excludes,
+  mapFile: argv.mapFile,
+  randomize: argv.randomize,
+}
 
 ms.getMnemonics(num, options)
   .then((mnems) => {
