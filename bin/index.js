@@ -1,10 +1,14 @@
 #!/usr/bin/env node
-
+const prettyjson = require('prettyjson');
 const ms = require('../lib/majorsystem.js');
 
 var argv = require('yargs')
   .usage('majorsystem [number]')
   .demandCommand(1)
+  .option('printMapping', {
+    describe: 'Print the consonant to digit mapping and exit',
+    count: true,
+  })
   .option('maxWords', {
     alias: 'mw',
     describe: 'Maximum number of words for the mnemonic',
@@ -48,18 +52,24 @@ const excludes = argv.exclude ? argv.exclude.split(',') : [];
 
 const options = Object.assign({}, argv, { excludes})
 
-ms.getMnemonics(num, options)
-  .then((mnems) => {
-    if (limit) {
-      mnems = mnems.slice(0, limit);
-    }
-    
-    if (argv.capitalize) {
-      mnems = mnems.map(ms.capitalizeConsonants);
-    }
-    
-    mnems.map((mnem) => {
-      ms.print(mnem, argv.colorize);
-    });
-  })
-  .catch(console.log)
+if (options.printMapping) {
+  let mapping = ms.getConsonantMap(options.mapFile);
+  console.log(prettyjson.render(mapping));
+}
+else {
+  ms.getMnemonics(num, options)
+    .then((mnems) => {
+      if (limit) {
+        mnems = mnems.slice(0, limit);
+      }
+      
+      if (argv.capitalize) {
+        mnems = mnems.map(ms.capitalizeConsonants);
+      }
+      
+      mnems.map((mnem) => {
+        ms.print(mnem, argv.colorize);
+      });
+    })
+    .catch(console.log)
+}
