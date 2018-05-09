@@ -5,8 +5,8 @@ const ms = require('../lib/majorsystem.js');
 var argv = require('yargs')
   .usage('majorsystem [number]')
   .demandCommand(1)
-  .option('depth', {
-    alias: 'd',
+  .option('maxWords', {
+    alias: 'mw',
     describe: 'Maximum number of words for the mnemonic',
     default: 3,
   })
@@ -20,6 +20,10 @@ var argv = require('yargs')
   })
   .option('exclude', {
     describe: 'A comma separated list of words to exclude',
+    default: '',
+  })
+  .option('wordList', {
+    describe: 'A path to a wordlist file to use',
     default: '',
   })
   .option('randomize', {
@@ -38,24 +42,14 @@ var argv = require('yargs')
   .alias('help', 'h')
   .argv;
 
-var num = argv._[0];
-var limit = argv.limit;
-
-
-
-const start = new Date().getTime();
+const num = argv._[0];
+const limit = argv.limit;
 const excludes = argv.exclude ? argv.exclude.split(',') : [];
 
-var options = {
-  maxDepth: argv.depth,
-  excludes: excludes,
-  mapFile: argv.mapFile,
-  randomize: argv.randomize,
-}
+const options = Object.assign({}, argv, { excludes})
 
 ms.getMnemonics(num, options)
   .then((mnems) => {
-    const time = new Date().getTime() - start;
     if (limit) {
       mnems = mnems.slice(0, limit);
     }
@@ -69,6 +63,3 @@ ms.getMnemonics(num, options)
     });
   })
   .catch(console.log)
-
-
-

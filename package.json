@@ -17,5 +17,8 @@
     "prettyjson": "^1.2.1",
     "shuffle-array": "^1.0.1",
     "yargs": "^11.0.0"
+  },
+  "devDependencies": {
+    "prettier": "1.12.1"
   }
 }
